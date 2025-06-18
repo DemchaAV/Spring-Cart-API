@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Welcome!!!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #8a1442; /* A common blue, change as you like */
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        a {
+            color: #911051;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="'Hello ' +${name} + ' Page lets get it started!'">!</h1>
+    <p>
+        This is a basic <code>index.html</code> page.
+    </p>
+<!--    <p>-->
+<!--        If you're seeing this, your Spring Boot application is running correctly and-->
+<!--        serving static content from the <code>src/main/resources/static</code> directory.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        You can now start building your application's features!-->
+<!--    </p>-->
+
+    <!-- Optional: Add links to key parts of your app if known -->
+    <!--
+    <h2>Quick Links:</h2>
+    <ul>
+        <li><a href="/api/some-endpoint">Example API Endpoint</a></li>
+        <li><a href="/swagger-ui.html">API Documentation (Swagger)</a></li>
+        <li><a href="/actuator/health">Application Health</a></li>
+    </ul>
+    -->
+
+    <div class="footer">
+        <p>&copy; <span id="currentYear"></span> Your Application Name</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: store
+  datasource:
+    url: jdbc:mysql://localhost:3306/store_api?createDatabaseIfNotExist=true
+    username: ${DB_USER_NAME}
+    password: ${DB_USER_PASSWORD}
+  jpa:
+    show-sql: true
+  jwt:
+    secret: ${JWM_SECRET}
+    accessTokenExpiration: 900 #5m
+    refreshTokenExpiration: 604800 #7d
