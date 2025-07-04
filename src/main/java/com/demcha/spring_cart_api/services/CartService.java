@@ -79,7 +79,7 @@ public class CartService {
         cartRepository.save(cart);
     }
 
-    public void deleteAllItems(UUID cartId) {
+    public void clearCart(UUID cartId) {
         var cart = getCart(cartId);
 
         cart.clear();

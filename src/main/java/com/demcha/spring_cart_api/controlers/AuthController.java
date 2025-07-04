@@ -7,6 +7,7 @@ import com.demcha.spring_cart_api.dtos.UserDto;
 import com.demcha.spring_cart_api.entities.User;
 import com.demcha.spring_cart_api.mappers.UserMapper;
 import com.demcha.spring_cart_api.repositories.UserRepository;
+import com.demcha.spring_cart_api.services.AuthService;
 import com.demcha.spring_cart_api.services.JwtService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,6 +33,7 @@ public class AuthController {
     private final JwtConfig jwtConfig;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final AuthService authService;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest request, HttpServletResponse response) {
@@ -71,10 +73,9 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDto> me() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var userId = (Long) authentication.getPrincipal();
 
-        User user = userRepository.findById(userId).orElse(null);
+
+        User user = authService.getCurrentUser();
         if (user == null) {
             return ResponseEntity.notFound().build();
         }

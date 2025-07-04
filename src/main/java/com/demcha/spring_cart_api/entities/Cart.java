@@ -62,6 +62,9 @@ public class Cart {
         items.remove(item);
         item.setCart(null);
     }
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
 
     public void clear() {
         items.clear();

@@ -1,9 +1,6 @@
 package com.demcha.spring_cart_api.controlers;
 
-import com.demcha.spring_cart_api.dtos.AddItemToCartRequest;
-import com.demcha.spring_cart_api.dtos.CartDto;
-import com.demcha.spring_cart_api.dtos.CartItemsDto;
-import com.demcha.spring_cart_api.dtos.UpdateCartItemRequest;
+import com.demcha.spring_cart_api.dtos.*;
 import com.demcha.spring_cart_api.exeptions.CartNotFoundException;
 import com.demcha.spring_cart_api.exeptions.ProductNotFoundException;
 import com.demcha.spring_cart_api.services.CartService;
@@ -80,13 +77,13 @@ public class CartController {
 
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleProductNotFoundInCart() {
-        return ResponseEntity.badRequest().body(Map.of("error", "Product not found in the cart"));
+    public ResponseEntity<ErrorDto> handleProductNotFoundInCart() {
+        return ResponseEntity.badRequest().body(new ErrorDto("Product not found in the cart"));
     }
 
     @ExceptionHandler(CartNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleCartNotFound() {
-        return ResponseEntity.badRequest().body(Map.of("error", "Cart not found"));
+    public ResponseEntity<ErrorDto> handleCartNotFound() {
+        return ResponseEntity.badRequest().body(new ErrorDto("Cart not found"));
     }
 
 }
