@@ -1,15 +1,15 @@
 package com.demcha.spring_cart_api.controlers;
 
 
+import com.demcha.spring_cart_api.dtos.ErrorDto;
 import com.demcha.spring_cart_api.dtos.OrderDto;
-import com.demcha.spring_cart_api.mappers.OrderMapper;
-import com.demcha.spring_cart_api.repositories.OrderRepository;
-import com.demcha.spring_cart_api.services.AuthService;
+import com.demcha.spring_cart_api.exeptions.OrderNotFoundException;
 import com.demcha.spring_cart_api.services.OrderService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,13 +18,28 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private final AuthService authService;
-    private final OrderMapper orderMapper;
-    private final OrderRepository orderRepository;
     private final OrderService orderService;
 
     @GetMapping
     public List<OrderDto> getAllOrders() {
         return orderService.getAllOrders();
+    }
+
+    @GetMapping("/{orderId}")
+    public OrderDto getOrder(@PathVariable("orderId") Long orderId) {
+        return orderService.getOrder(orderId);
+
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<Void> handleOrderNotFoundException() {
+        return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorDto> handleAccessDeniedException(Exception e) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(new ErrorDto(e.getMessage()));
     }
 }

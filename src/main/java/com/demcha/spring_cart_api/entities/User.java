@@ -1,6 +1,5 @@
 package com.demcha.spring_cart_api.entities;
 
-import com.demcha.spring_cart_api.dtos.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.demcha.spring_cart_api.mappers.UserMapper;
 
 @Setter
 @Getter
@@ -17,10 +15,12 @@ import com.demcha.spring_cart_api.mappers.UserMapper;
 @Builder
 @Entity
 @Table(name = "users")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "name")
