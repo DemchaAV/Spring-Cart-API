@@ -13,4 +13,5 @@ spring:
     refreshTokenExpiration: 604800 #7d
 stripe:
     secretKey: ${STIPE_SECRET_KEY}
+    webhookSecretKey: ${WEBHOOK_SECRET_KEY}
 websiteUrl: http://localhost:4242

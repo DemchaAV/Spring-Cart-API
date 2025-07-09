@@ -8,12 +8,9 @@ import com.demcha.spring_cart_api.exeptions.CartNotFoundException;
 import com.demcha.spring_cart_api.exeptions.PaymentException;
 import com.demcha.spring_cart_api.repositories.CartRepository;
 import com.demcha.spring_cart_api.repositories.OrderRepository;
-import com.stripe.exception.StripeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.text.ParseException;
 
 @Service
 @RequiredArgsConstructor
