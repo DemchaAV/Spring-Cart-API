@@ -9,5 +9,8 @@ spring:
     show-sql: true
   jwt:
     secret: ${JWM_SECRET}
-    accessTokenExpiration: 72000  #2h
+    accessTokenExpiration: 7200  #2h
     refreshTokenExpiration: 604800 #7d
+stripe:
+    secretKey: ${STIPE_SECRET_KEY}
+websiteUrl: http://localhost:4242
