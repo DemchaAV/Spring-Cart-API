@@ -1,13 +1,12 @@
-package com.demcha.spring_cart_api.services;
+package com.demcha.spring_cart_api.payment;
 
-import com.demcha.spring_cart_api.dtos.CheckoutRequest;
-import com.demcha.spring_cart_api.dtos.CheckoutResponse;
 import com.demcha.spring_cart_api.entities.Order;
 import com.demcha.spring_cart_api.exeptions.CartEmptyException;
 import com.demcha.spring_cart_api.exeptions.CartNotFoundException;
-import com.demcha.spring_cart_api.exeptions.PaymentException;
 import com.demcha.spring_cart_api.repositories.CartRepository;
 import com.demcha.spring_cart_api.repositories.OrderRepository;
+import com.demcha.spring_cart_api.services.AuthService;
+import com.demcha.spring_cart_api.services.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,5 +49,18 @@ public class CheckoutService {
             orderRepository.delete(order);
             throw e;
         }
+    }
+
+    public void handleWebhookEven(WebhookRequest request) {
+        paymentGateway
+                .parseWebhookRequest(request)
+                .ifPresent(paymentResult -> {
+                            Order order = orderRepository.findById(paymentResult.getOrderId()).orElseThrow();
+                            order.setStatus(paymentResult.getPaymentStatus());
+                            orderRepository.save(order);
+                        }
+                );
+
+
     }
 }

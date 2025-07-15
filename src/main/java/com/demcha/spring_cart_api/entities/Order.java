@@ -26,7 +26,7 @@ public class Order {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private PaymentStatus status;
 
 
     @Column(name = "created_at", insertable = false, updatable = false)
@@ -42,7 +42,7 @@ public class Order {
         var order = new Order();
 
         order.setTotalPrice(cart.getTotalPrice());
-        order.setStatus(OrderStatus.PENDING);
+        order.setStatus(PaymentStatus.PENDING);
         order.setCustomer(customer);
 
         cart.getItems().forEach(item -> {

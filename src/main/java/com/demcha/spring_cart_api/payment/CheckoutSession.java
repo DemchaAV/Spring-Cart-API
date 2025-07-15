@@ -1,4 +1,4 @@
-package com.demcha.spring_cart_api.services;
+package com.demcha.spring_cart_api.payment;
 
 
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.demcha.spring_cart_api.dtos;
+package com.demcha.spring_cart_api.payment;
 
 
 import lombok.Data;
