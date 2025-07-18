@@ -1,4 +1,4 @@
-package com.demcha.spring_cart_api.config;
+package com.demcha.spring_cart_api.payments;
 
 import com.stripe.Stripe;
 import jakarta.annotation.PostConstruct;
